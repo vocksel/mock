@@ -4,10 +4,13 @@
         "$className": "DataModel",
         "ReplicatedStorage": {
             "DevPackages": {
-                "$path": "DevPackages"
+                "$path": "DevPackages",
+                "Mock": {
+                    "$path": "src"
+                }
             },
-            "Mock": {
-                "$path": "src"
+            "Example": {
+                "$path": "example"
             }
         },
         "ServerScriptService": {
