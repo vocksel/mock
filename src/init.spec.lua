@@ -1,12 +1,12 @@
 return function()
 	local Mock = require(script.Parent)
 
-	it("should have a 'mock' property", function()
+	it("has a 'mock' property", function()
 		local mock = Mock.new()
 		expect(mock.mock).to.be.ok()
 	end)
 
-	it("should return a new Mock instance when indexing", function()
+	it("returns a new Mock instance when indexing", function()
 		local mock = Mock.new()
 		expect(Mock.is(mock.foo)).to.equal(true)
 	end)
@@ -130,7 +130,7 @@ return function()
 	end)
 
 	describe("Mock:reset()", function()
-		it("should reset the `calls` array", function()
+		it("resets the `calls` array", function()
 			local mock = Mock.new()
 
 			mock()
