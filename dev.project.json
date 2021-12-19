@@ -1,0 +1,19 @@
+{
+    "name": "mock (dev)",
+    "tree": {
+        "$className": "DataModel",
+        "ReplicatedStorage": {
+            "DevPackages": {
+                "$path": "DevPackages"
+            },
+            "Mock": {
+                "$path": "src"
+            }
+        },
+        "ServerScriptService": {
+            "Tests": {
+                "$path": "tests"
+            }
+        }
+    }
+}
