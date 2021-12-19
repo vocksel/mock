@@ -2,7 +2,7 @@ local Players = game:GetService("Players")
 
 local example = {}
 
--- Exposing the Players service allows it to be mocked
+-- Exposing the Players service allows it to be mocked in tests
 example.Players = Players
 
 function example:getCharacters()
