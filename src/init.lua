@@ -5,14 +5,12 @@ local Mock = {}
 function Mock.new(name: string?)
 	local self = {}
 
-	self._returnValue = None
 	self._implementation = None
 	self._children = {}
 
 	self.mock = {
 		name = name or "Mock",
 		calls = {},
-		results = {},
 	}
 
 	return setmetatable(self, Mock)
