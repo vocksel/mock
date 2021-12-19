@@ -1,5 +1,6 @@
 [package]
 name = "vocksel/mock"
+description = "Package for creating Jest-like mocks for use with unit testing."
 version = "0.1.0"
 authors = [ "David Minnerly <me@vocksel.com>" ]
 license = "MIT"
