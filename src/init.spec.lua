@@ -121,11 +121,21 @@ return function()
 		it("mocks the implementation", function()
 			local mock = Mock.new()
 
-			mock.foo.bar:mockImplementation(function(x: number)
+			mock.timesTwo:mockImplementation(function(x: number)
 				return x * 2
 			end)
 
-			expect(mock.foo.bar(10)).to.equal(20)
+			expect(mock.timesTwo(10)).to.equal(20)
+		end)
+
+		it("mocks the implementation of nested mocks", function()
+			local mock = Mock.new()
+
+			mock.foo.plusTwo:mockImplementation(function(x: number)
+				return x + 2
+			end)
+
+			expect(mock.foo.plusTwo(10)).to.equal(12)
 		end)
 	end)
 
