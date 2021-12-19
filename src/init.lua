@@ -22,11 +22,6 @@ function Mock:__index(key: string)
 		return member
 	end
 
-	local returnValue = rawget(self, "_returnValue")
-	if returnValue ~= None then
-		return returnValue
-	end
-
 	local mock = self._children[key]
 	if not mock then
 		mock = Mock.new(key)
