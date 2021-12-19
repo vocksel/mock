@@ -7,11 +7,11 @@ function Mock.new(name: string?)
 
 	self._returnValue = None
 	self._implementation = None
+	self._children = {}
 
 	self.mock = {
 		name = name or "Mock",
 		calls = {},
-		children = {},
 		results = {},
 	}
 
@@ -29,10 +29,10 @@ function Mock:__index(key: string)
 		return returnValue
 	end
 
-	local mock = self.mock.children[key]
+	local mock = self._children[key]
 	if not mock then
 		mock = Mock.new(key)
-		self.mock.children[key] = mock
+		self._children[key] = mock
 	end
 	return mock
 end
