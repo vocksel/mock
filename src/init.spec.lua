@@ -21,6 +21,11 @@ return function()
 		expect(mock.bar.baz).to.equal("string")
 	end)
 
+	it("returns the same mock when indexing a child", function()
+		local mock = Mock.new()
+		expect(mock.foo.bar).to.equal(mock.foo.bar)
+	end)
+
 	describe("name", function()
 		it("sets the mock's name to 'Mock' by default", function()
 			local mock = Mock.new()
