@@ -134,5 +134,18 @@ return function()
 			mock:reset()
 			expect(#mock.mock.calls).to.equal(0)
 		end)
+
+		it("resets the mocked implementation", function()
+			local mock = Mock.new()
+			mock:mockImplementation(function()
+				return true
+			end)
+
+			expect(mock()).to.equal(true)
+
+			mock:reset()
+
+			expect(mock()).to.never.equal(true)
+		end)
 	end)
 end
