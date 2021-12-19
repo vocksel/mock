@@ -1,48 +1,54 @@
+local None = newproxy()
+
 local Mock = {}
-Mock.__index = Mock
 
 function Mock.new(name: string?)
 	local self = {}
 
-	local meta = {
-		__index = function(_self, key: string)
-			local returnValue = rawget(self, "_returnValue")
-
-			print("returnValue", returnValue)
-
-			local member = rawget(self, key) or rawget(Mock, key)
-
-			if member then
-				return member
-			else
-				return Mock.new(key)
-			end
-		end,
-
-		__tostring = function(_self)
-			return self.mock.name
-		end,
-
-		__call = function(_self, ...)
-			local args = table.pack(...)
-			table.insert(self.mock.calls, args)
-
-			if self._implementation then
-				return self._implementation(...)
-			end
-		end,
-	}
+	self._returnValue = None
+	self._implementation = None
 
 	self.mock = {
 		name = name or "Mock",
 		calls = {},
+		children = {},
 		results = {},
 	}
 
-	self._returnValue = nil
-	self._implementation = nil
+	return setmetatable(self, Mock)
+end
 
-	return setmetatable(self, meta)
+function Mock:__index(key: string)
+	local member = rawget(self, key) or rawget(Mock, key)
+	if member then
+		return member
+	end
+
+	local returnValue = rawget(self, "_returnValue")
+	if returnValue ~= None then
+		return returnValue
+	end
+
+	local mock = self.mock.children[key]
+	if not mock then
+		mock = Mock.new(key)
+		self.mock.children[key] = mock
+	end
+	return mock
+end
+
+function Mock:__call(...)
+	local args = table.pack(...)
+	table.insert(self.mock.calls, args)
+
+	local implementation = rawget(self, "_implementation")
+	if implementation ~= None then
+		return implementation(...)
+	end
+end
+
+function Mock:__tostring()
+	return self.mock.name
 end
 
 function Mock.is(other: any): boolean
@@ -50,17 +56,23 @@ function Mock.is(other: any): boolean
 end
 
 function Mock:mockReturnValue(returnValue: any): nil
-	print("_returnValue", returnValue)
-	rawset(self, "_returnValue", returnValue)
+	if returnValue == nil then
+		returnValue = None
+	end
+	self._returnValue = returnValue
 end
 
 function Mock:mockImplementation(implementation: () -> nil): nil
-	print("_implementation", implementation)
-	rawset(self, "_implementation", implementation)
+	if implementation == nil then
+		implementation = None
+	end
+	self._implementation = implementation
 end
 
 function Mock:reset()
 	self.mock.calls = {}
+	self._returnValue = None
+	self._implementation = None
 end
 
 return Mock

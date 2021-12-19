@@ -102,10 +102,12 @@ return function()
 		end)
 	end)
 
-	fdescribe("Mock:mockReturnValue()", function()
+	describe("Mock:mockReturnValue()", function()
 		it("returns the value when indexed", function()
 			local mock = Mock.new()
+
 			mock.foo.bar:mockReturnValue(true)
+
 			expect(mock.foo.bar).to.equal(true)
 		end)
 	end)
@@ -115,8 +117,7 @@ return function()
 			local mock = Mock.new()
 
 			mock.foo.bar:mockImplementation(function(x: number)
-				print("run")
-				return x + 10
+				return x * 2
 			end)
 
 			expect(mock.foo.bar(10)).to.equal(20)
