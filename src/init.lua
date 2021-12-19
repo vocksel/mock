@@ -55,13 +55,6 @@ function Mock.is(other: any): boolean
 	return typeof(other) == "table" and other.mock ~= nil
 end
 
-function Mock:mockReturnValue(returnValue: any): nil
-	if returnValue == nil then
-		returnValue = None
-	end
-	self._returnValue = returnValue
-end
-
 function Mock:mockImplementation(implementation: () -> nil): nil
 	if implementation == nil then
 		implementation = None
@@ -71,7 +64,6 @@ end
 
 function Mock:reset()
 	self.mock.calls = {}
-	self._returnValue = None
 	self._implementation = None
 end
 

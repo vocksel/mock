@@ -11,6 +11,16 @@ return function()
 		expect(Mock.is(mock.foo)).to.equal(true)
 	end)
 
+	it("allows arbitrary values to be assigned to the mock", function()
+		local mock = Mock.new()
+
+		mock.foo = true
+		expect(mock.foo).to.equal(true)
+
+		mock.bar.baz = "string"
+		expect(mock.bar.baz).to.equal("string")
+	end)
+
 	describe("name", function()
 		it("sets the mock's name to 'Mock' by default", function()
 			local mock = Mock.new()
@@ -99,16 +109,6 @@ return function()
 			for _, primitive in ipairs(primitives) do
 				expect(Mock.is(primitive)).to.equal(false)
 			end
-		end)
-	end)
-
-	describe("Mock:mockReturnValue()", function()
-		it("returns the value when indexed", function()
-			local mock = Mock.new()
-
-			mock.foo.bar:mockReturnValue(true)
-
-			expect(mock.foo.bar).to.equal(true)
 		end)
 	end)
 
