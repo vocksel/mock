@@ -68,7 +68,7 @@ If you are using [Wally](https://github.com/UpliftGames/wally), add the followin
 
 ```
 [dev-dependencies]
-Mock = "vocksel/mock@v0.1.0
+Mock = "vocksel/mock@0.1.1"
 ```
 
 ### Roblox Studio
