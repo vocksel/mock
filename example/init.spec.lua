@@ -1,5 +1,5 @@
 return function()
-	local Mock = require(game.ReplicatedStorage.DevPackages.Mock)
+	local Mock = require(game.ReplicatedStorage.Packages.Mock)
 	local example = require(script.Parent)
 
 	it("should get all the characters in the experience", function()

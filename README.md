@@ -31,7 +31,7 @@ return example
 ```lua
 -- example/init.spec.lua
 return function()
-	local Mock = require(game.ReplicatedStorage.DevPackages.Mock)
+	local Mock = require(game.ReplicatedStorage.Packages.Mock)
 	local example = require(script.Parent)
 
 	it("should get all the characters in the experience", function()
@@ -73,7 +73,7 @@ Mock = "vocksel/mock@v0.1.0
 
 ### Roblox Studio
 
-* Download a copy of the rbxm from the [releases page](https://github.com/vocksel/mock/releases/latest) under the Assets section. 
+* Download a copy of the rbxm from the [releases page](https://github.com/vocksel/mock/releases/latest) under the Assets section.
 * Drag and drop the file into Roblox Studio to add it to your experience.
 
 ## API
@@ -85,7 +85,7 @@ Returns a new Mock instance.
 Usage:
 
 ```lua
-local Mock = require(game.ReplicatedStorage.DevPackages.Mock)
+local Mock = require(game.ReplicatedStorage.Packages.Mock)
 
 local mock = Mock.new()
 ```
@@ -95,7 +95,7 @@ When a mock is indexed, if the member does not exist (i.e. it is not listed in t
 ```lua
 local mockPlayers = Mock.new()
 
--- GetPlayers implicitly becomes a Mock 
+-- GetPlayers implicitly becomes a Mock
 mockPlayers.GetPlayers:mockImplementation(function()
     return { "Player1", "Player2" }
 end)
@@ -111,7 +111,7 @@ Returns true if `other` is a Mock instance. False otherwise.
 Usage:
 
 ```lua
-local Mock = require(game.ReplicatedStorage.DevPackages.Mock)
+local Mock = require(game.ReplicatedStorage.Packages.Mock)
 
 local mock = Mock.new()
 
@@ -126,7 +126,7 @@ Each Mock instance comes with a `mock` object with the following fields:
     - The name of the Mock. By default, this is set to `"Mock"`. When indexing a mock, the implicitly created mocks are named after the key that was indexed.
         ```lua
         local mock = Mock.new()
-        print(mock.foo.bar.mock.name) -- "bar"    
+        print(mock.foo.bar.mock.name) -- "bar"
         ```
 - `calls: table`
     - An array containing arrays of the arguments passed each time the mock is called.
